@@ -8,6 +8,7 @@ import {
 import { PrismicRichText } from '@prismicio/react';
 import type * as prismic from '@prismicio/client';
 import Datetime from '@/components/Datetime';
+import Tags from '@/components/Tags';
 
 type PostElement = HTMLDivElement;
 export type PostProps = {
@@ -93,18 +94,12 @@ export const Post = React.forwardRef<
           mb-4
         `}
       >
-        <span
-          className={`
-            text-xs
-            rounded-1/2
-            px-[10px]
-            py-[4px]
-            text-white
-            bg-blue-500
-          `}
-        >
-          #{type.toLowerCase()}
-        </span>
+        <Tags
+          list={type}
+          colors={{
+            live: 'purple',
+          }}
+        />
       </div>
 
       <PrismicNextLink

@@ -27,6 +27,9 @@ const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    '^border-*'
+  ],
   theme: {
     spacing,
     fontSize: {

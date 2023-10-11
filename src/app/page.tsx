@@ -5,6 +5,7 @@ import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import type { Content } from '@prismicio/client';
 import Datetime from '@/components/Datetime';
+import Tags from '@/components/Tags';
 import { Metadata, ResolvingMetadata } from 'next';
 
 const DEV_TO_API_URL = process.env.DEV_TO_API_URL as string;
@@ -93,7 +94,6 @@ export default async function Home() {
           />
         )}
 
-        {/* Articles */}
         <div
           className={`
             py-4
@@ -161,33 +161,19 @@ export default async function Home() {
                   />
                 </header>
 
-                <div
-                  className={`
-                    flex
-                    flex-row
-                    gap-1
-                    mb-4
-                    flex-wrap
-                  `}
-                >
-                  {post.tag_list.map(
-                    (tag: string, index: number) => (
-                      <span
-                        key={index}
-                        className={`
-                          text-xs
-                          rounded-1/2
-                          px-[10px]
-                          py-[4px]
-                          text-white
-                          bg-blue-500
-                        `}
-                      >
-                        #{tag}
-                      </span>
-                    )
-                  )}
-                </div>
+                <Tags
+                  list={post.tag_list}
+                  colors={{
+                    beginners: 'green',
+                    devrel: 'orange',
+                    braziliandevs: 'yellow',
+                    career: 'gray',
+                    tutorial: 'yellow',
+                    discuss: 'green',
+                    frontend: 'pink',
+                    techtalks: 'purple',
+                  }}
+                />
 
                 <a
                   className={`
