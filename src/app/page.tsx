@@ -3,9 +3,11 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+const DEV_TO_API_URL = process.env.DEV_TO_API_URL as string;
+
 async function getDevToPosts() {
   try {
-    const response = await fetch('https://dev.to/api/articles?username=devrelbr');
+    const response = await fetch(DEV_TO_API_URL);
     const data = await response.json();
 
     return data;
@@ -151,8 +153,8 @@ export default async function Home() {
                       h-full
                       object-cover
                     `}
-                    width={120}
-                    height={120}
+                    width={300}
+                    height={300}
                   />
                 </div>
 
@@ -325,8 +327,8 @@ export default async function Home() {
                       h-full
                       object-cover
                     `}
-                    width={120}
-                    height={60}
+                    width={500}
+                    height={250}
                   />
                 </a>
 
