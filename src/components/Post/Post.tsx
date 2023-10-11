@@ -53,25 +53,29 @@ export const Post = React.forwardRef<
           mb-2
         `}
       >
-        <PrismicRichText
-          field={title}
-          components={{
-            /**
-             * @todo Transformar em componente quando houver definição de layout.
-             */
-            heading3: ({ children }) => (
-              <h2
-                className={`
-                  text-xl
-                  font-bold
-                  md:text-2xl
-                `}
-              >
-                {children}
-              </h2>
-            ),
-          }}
-        />
+        <PrismicNextLink
+          field={link}
+        >
+          <PrismicRichText
+            field={title}
+            components={{
+              /**
+               * @todo Transformar em componente quando houver definição de layout.
+               */
+              heading3: ({ children }) => (
+                <h2
+                  className={`
+                    text-xl
+                    font-bold
+                    md:text-2xl
+                  `}
+                >
+                  {children}
+                </h2>
+              ),
+            }}
+          />
+        </PrismicNextLink>
 
         {date && (
           <Datetime
@@ -103,12 +107,16 @@ export const Post = React.forwardRef<
         </span>
       </div>
 
-      <div
+      <PrismicNextLink
+        field={link}
         className={`
           rounded-2
           overflow-hidden
           max-h-[400px]
           mb-2
+          block
+          [&>img]:transition-transform
+          hover:[&>img]:scale-110
         `}
       >
         <PrismicNextImage
@@ -122,7 +130,7 @@ export const Post = React.forwardRef<
           width={300}
           height={300}
         />
-      </div>
+      </PrismicNextLink>
 
       <div
         className={`
