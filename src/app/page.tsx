@@ -20,13 +20,13 @@ export default async function Home() {
   const posts = await getDevToPosts();
 
   const hightlight = [{
-    title: 'Eventinho legal',
-    tags: ['evento', 'online'],
-    date: '19 de Julho de 2021',
+    title: 'DevRel é para você ? - #2 Bastidores de eventos de tecnologia',
+    tags: ['live'],
+    date: '12 Jul, 2021',
     cover: 'http://lorempixel.com.br/120/120?1',
     link: {
       label: 'Participar',
-      url: 'https://google.com.br',
+      url: 'https://www.twitch.tv/danielhe4rt',
     },
     description: `
       <p>
