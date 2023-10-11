@@ -58,21 +58,6 @@ export default function Home() {
           mx-auto
         `}
       >
-        <header
-          className={`
-            py-4
-          `}
-        >
-          header
-        </header>
-      </div>
-
-      <div
-        className={`
-          container
-          mx-auto
-        `}
-      >
         {/* Highlight Content */}
         <div
           className={`
@@ -86,8 +71,9 @@ export default function Home() {
           >
             <h2
               className={`
-                text-5xl
+                text-4xl
                 font-bold
+                md:text-5xl
               `}
             >
               Próximos eventos
@@ -102,30 +88,40 @@ export default function Home() {
             {hightlight.map((item, index) => (
               <article
                 key={index}
-                className={`
-                  flex
-                  flex-col
-                  gap-2
-                `}
               >
-                <h3
+                <header
                   className={`
-                    text-3xl
+                    mb-2
                   `}
                 >
-                  {item.title}
-                </h3>
+                  <h3
+                    className={`
+                      text-xl
+                      font-bold
+                      md:text-2xl
+                    `}
+                  >
+                    {item.title}
+                  </h3>
 
-                <time>
-                  19 de Julho de 2021
-                </time>
+                  <time
+                    className={`
+                      text-sm
+                      text-gray-400
+                      mb-1
+                      block
+                    `}
+                  >
+                    19 de Julho de 2021
+                  </time>
+                </header>
 
                 <div
                   className={`
                     flex
                     flex-row
                     gap-1
-                    mb-2
+                    mb-4
                   `}
                 >
                   {item.tags.map((tag, index) => (
@@ -136,8 +132,8 @@ export default function Home() {
                         rounded-1/2
                         px-[10px]
                         py-[4px]
-                        text-black
-                        bg-blue-100
+                        text-white
+                        bg-blue-500
                       `}
                     >
                       #{tag}
@@ -145,7 +141,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <picture
+                <div
                   className={`
                     rounded-2
                     overflow-hidden
@@ -153,7 +149,7 @@ export default function Home() {
                     mb-2
                   `}
                 >
-                  <img
+                  <Image
                     src={item.cover}
                     alt=""
                     className={`
@@ -164,10 +160,13 @@ export default function Home() {
                     width={120}
                     height={120}
                   />
-                </picture>
+                </div>
 
                 <div
                   dangerouslySetInnerHTML={{ __html: item.description }}
+                  className={`
+                    mb-2
+                  `}
                 />
 
                 <footer
@@ -206,7 +205,11 @@ export default function Home() {
         </div>
 
         {/* Articles */}
-        <div>
+        <div
+          className={`
+            py-4
+          `}
+        >
           <div
             className={`
               mb-8
@@ -214,7 +217,8 @@ export default function Home() {
           >
             <h2
               className={`
-                text-5xl
+                text-4xl
+                md:text-5xl
                 font-bold
               `}
             >
@@ -229,8 +233,11 @@ export default function Home() {
           <div
             className={`
               grid
-              grid-cols-2
-              gap-2
+              grid-cols-1
+              gap-4
+              md:grid-cols-2
+              md:gap-3
+              lg:grid-cols-3
             `}
           >
             {posts.map((item, index) => (
@@ -244,27 +251,35 @@ export default function Home() {
                 >
                   <h3
                     className={`
-                      text-2xl
+                      text-xl
                       font-bold
+                      md:text-2xl
                     `}
                   >
                     {item.title}
                   </h3>
 
-                  <time>
+                  <time
+                    className={`
+                      text-sm
+                      text-gray-400
+                      mb-1
+                      block
+                    `}
+                  >
                     19 de Julho de 2021
                   </time>
                 </header>
 
-                <picture
+                <div
                   className={`
                     rounded-2
                     overflow-hidden
-                    max-h-[200px]
+                    h-[200px]
                     mb-2
                   `}
                 >
-                  <img
+                  <Image
                     src={item.cover}
                     alt=""
                     className={`
@@ -275,10 +290,13 @@ export default function Home() {
                     width={120}
                     height={60}
                   />
-                </picture>
+                </div>
 
                 <div
                   dangerouslySetInnerHTML={{ __html: item.description }}
+                  className={`
+                    mb-2
+                  `}
                 />
 
                 <footer
@@ -295,11 +313,11 @@ export default function Home() {
                     className={`
                       text-sm
                       text-blue-400
-                      hover:underline
                       flex
                       flex-row
                       gap-1/2
                       items-center
+                      hover:underline
                     `}
                   >
                     <ArrowTopRightOnSquareIcon
@@ -314,24 +332,8 @@ export default function Home() {
               </article>
             ))}
           </div>
-
         </div>
       </div>
-
-      {/* <footer
-        className={`
-          py-4
-        `}
-      >
-        <div
-          className={`
-            container
-            mx-auto
-          `}
-        >
-          footer
-        </div>
-      </footer> */}
     </main>
   );
 }
