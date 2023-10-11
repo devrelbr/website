@@ -5,6 +5,7 @@ import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import type { Content } from '@prismicio/client';
 import Datetime from '@/components/Datetime';
+import { Metadata, ResolvingMetadata } from 'next';
 
 const DEV_TO_API_URL = process.env.DEV_TO_API_URL as string;
 
@@ -38,6 +39,30 @@ async function getPageData(): Promise<
     };
   } catch (error) {
     throw error;
+  }
+}
+
+export async function generateMetadata(
+  {},
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const {
+    meta_title: title,
+    meta_description: description,
+    meta_image: image,
+  } = await getPageData();
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title,
+    description,
+    openGraph: {
+      images: [
+        image?.url,
+        ...previousImages,
+      ].map(Boolean) as any as string[],
+    },
   }
 }
 
