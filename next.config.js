@@ -4,7 +4,7 @@ const nextConfig = {}
 module.exports = {
   ...nextConfig,
   images: {
-    domains: ['lorempixel.com.br'],
+    domains: ['lorempixel.com.br', 'res.cloudinary.com'],
   },
   webpack(config) {
     config.module.rules.push({

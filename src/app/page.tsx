@@ -1,7 +1,24 @@
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-export default function Home() {
+async function getDevToPosts() {
+  try {
+    const response = await fetch('https://dev.to/api/articles?username=devrelbr');
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+
+    return [];
+  }
+}
+
+export default async function Home() {
+  const posts = await getDevToPosts();
+
   const hightlight = [{
     title: 'Eventinho legal',
     tags: ['evento', 'online'],
@@ -17,38 +34,6 @@ export default function Home() {
       </p>
     `,
   }];
-
-  const posts = [
-    {
-      title: 'Postizinho legal',
-      date: '19 de Julho de 2021',
-      cover: 'http://lorempixel.com.br/120/60?2',
-      link: {
-        label: 'Ler mais',
-        url: 'https://google.com.br',
-      },
-      description: `
-        <p>
-          Mussum Ipsum, cacilds vidis litro abertis. Atirei o pau no gatis, per gatis num morreus.
-        </p>
-      `,
-    },
-    {
-      title: 'Outro postizinho legal',
-      tags: ['post'],
-      date: '19 de Julho de 2021',
-      cover: 'http://lorempixel.com.br/120/60?3',
-      link: {
-        label: 'Ler mais',
-        url: 'https://google.com.br',
-      },
-      description: `
-        <p>
-          Mussum Ipsum, cacilds vidis litro abertis. Atirei o pau no gatis, per gatis num morreus.
-        </p>
-      `,
-    },
-  ];
 
   return (
     <main>
@@ -236,27 +221,34 @@ export default function Home() {
               grid-cols-1
               gap-4
               md:grid-cols-2
-              md:gap-3
+              md:gap-4
               lg:grid-cols-3
             `}
           >
-            {posts.map((item, index) => (
+            {posts.map(({ id, ...post }: any) => (
               <article
-                key={index}
+                key={id}
               >
                 <header
                   className={`
                     mb-2
+                    min-h-[93px]
                   `}
                 >
                   <h3
                     className={`
                       text-xl
                       font-bold
+                      line-clamp-2
                       md:text-2xl
                     `}
                   >
-                    {item.title}
+                    <a
+                      href={post.url}
+                      target="_blank"
+                    >
+                      {post.title}
+                    </a>
                   </h3>
 
                   <time
@@ -267,20 +259,56 @@ export default function Home() {
                       block
                     `}
                   >
-                    19 de Julho de 2021
+                    {format(
+                      new Date(post.published_at),
+                      'PP',
+                      { locale: ptBR },
+                    )}
                   </time>
                 </header>
 
                 <div
                   className={`
+                    flex
+                    flex-row
+                    gap-1
+                    mb-4
+                  `}
+                >
+                  {post.tag_list.map(
+                    (tag: string, index: number) => (
+                      <span
+                        key={index}
+                        className={`
+                          text-xs
+                          rounded-1/2
+                          px-[10px]
+                          py-[4px]
+                          text-white
+                          bg-blue-500
+                        `}
+                      >
+                        #{tag}
+                      </span>
+                    )
+                  )}
+                </div>
+
+                <a
+                  className={`
                     rounded-2
                     overflow-hidden
                     h-[200px]
                     mb-2
+                    block
+                    [&>img]:transition-transform
+                    hover:[&>img]:scale-110
                   `}
+                  href={post.url}
+                  target="_blank"
                 >
                   <Image
-                    src={item.cover}
+                    src={post.cover_image}
                     alt=""
                     className={`
                       w-full
@@ -290,10 +318,10 @@ export default function Home() {
                     width={120}
                     height={60}
                   />
-                </div>
+                </a>
 
                 <div
-                  dangerouslySetInnerHTML={{ __html: item.description }}
+                  dangerouslySetInnerHTML={{ __html: post.description }}
                   className={`
                     mb-2
                   `}
@@ -308,7 +336,7 @@ export default function Home() {
                   `}
                 >
                   <a
-                    href={item.link.url}
+                    href={post.url}
                     target="_blank"
                     className={`
                       text-sm
@@ -325,7 +353,7 @@ export default function Home() {
                       height={16}
                     />
                     <span>
-                      {item.link.label}
+                      Ler artigo
                     </span>
                   </a>
                 </footer>
