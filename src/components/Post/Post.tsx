@@ -11,7 +11,7 @@ import Datetime from '@/components/Datetime';
 
 type PostElement = HTMLDivElement;
 export type PostProps = {
-  date: NonNullable<prismic.TimestampField>;
+  date: prismic.TimestampField;
   title: prismic.TitleField;
   description: prismic.RichTextField;
   type: NonNullable<prismic.SelectField>;
@@ -73,9 +73,11 @@ export const Post = React.forwardRef<
           }}
         />
 
-        <Datetime
-          date={date}
-        />
+        {date && (
+          <Datetime
+            date={date}
+          />
+        )}
       </header>
 
       <div
