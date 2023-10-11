@@ -28,9 +28,9 @@ const Highlights = ({ slice }: HighlightsProps): JSX.Element => {
             heading2: ({ children }) => (
               <h2
                 className={`
-                  text-2xl
+                  text-4xl
+                  md:text-5xl
                   font-bold
-                  md:text-3xl
                 `}
               >
                 {children}
