@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { createClient } from '@/prismicio';
+import { SliceZone } from '@prismicio/react';
+import { components } from '@/slices';
+import type { Content } from '@prismicio/client';
+import Datetime from '@/components/Datetime';
 
 const DEV_TO_API_URL = process.env.DEV_TO_API_URL as string;
 
@@ -18,24 +21,37 @@ async function getDevToPosts() {
   }
 }
 
-export default async function Home() {
-  const posts = await getDevToPosts();
+async function getPageData(): Promise<
+  Content.HomeDocumentData & { uid: Content.HomeDocument['uid']; }
+> {
+  const client = createClient();
 
-  const hightlight = [{
-    title: 'DevRel é para você? - #2 Bastidores de eventos de tecnologia',
-    tags: ['live'],
-    date: '12 Jul, 2021',
-    cover: 'http://lorempixel.com.br/120/120?1',
-    link: {
-      label: 'Participar',
-      url: 'https://www.twitch.tv/danielhe4rt',
-    },
-    description: `
-      <p>
-        Mussum Ipsum, cacilds vidis litro abertis. Atirei o pau no gatis, per gatis num morreus. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Nulla id gravida magna, ut semper sapien. Aenean aliquam molestie leo, vitae iaculis nisl.
-      </p>
-    `,
-  }];
+  try {
+    const {
+      data,
+      uid,
+    } = await client.getSingle('home');
+
+    return {
+      ...data,
+      uid,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+export default async function Home() {
+  /**
+   * @todo Seria interessante montar todo o objeto da página em uma
+   * rota /api/home?
+   */
+  const page = await getPageData();
+  /**
+   * @todo Nas próximas versões, a exibição dos posts será controlada
+   * através do Prismic.
+   */
+  const posts = await getDevToPosts();
 
   return (
     <main>
@@ -45,160 +61,12 @@ export default async function Home() {
           mx-auto
         `}
       >
-        {/* Highlight Content */}
-        <div
-          className={`
-            py-4
-          `}
-        >
-          <div
-            className={`
-              mb-6
-            `}
-          >
-            <h2
-              className={`
-                text-4xl
-                font-bold
-                md:text-5xl
-              `}
-            >
-              Próximos eventos
-            </h2>
-
-            <p>
-              Participe dos nossos meetups e encontre outras pessoas da comunidade.
-            </p>
-          </div>
-
-          <div
-            className={`
-              grid
-              grid-cols-1
-              gap-4
-              md:grid-cols-2
-              md:gap-4
-            `}
-          >
-            {hightlight.map((item, index) => (
-              <article
-                key={index}
-              >
-                <header
-                  className={`
-                    mb-2
-                  `}
-                >
-                  <h3
-                    className={`
-                      text-xl
-                      font-bold
-                      md:text-2xl
-                    `}
-                  >
-                    {item.title}
-                  </h3>
-
-                  <time
-                    className={`
-                      text-sm
-                      text-gray-400
-                      mb-1
-                      block
-                    `}
-                  >
-                    19 de Julho de 2021
-                  </time>
-                </header>
-
-                <div
-                  className={`
-                    flex
-                    flex-row
-                    flex-wrap
-                    gap-1
-                    mb-4
-                  `}
-                >
-                  {item.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className={`
-                        text-xs
-                        rounded-1/2
-                        px-[10px]
-                        py-[4px]
-                        text-white
-                        bg-blue-500
-                      `}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div
-                  className={`
-                    rounded-2
-                    overflow-hidden
-                    max-h-[400px]
-                    mb-2
-                  `}
-                >
-                  <Image
-                    src={item.cover}
-                    alt=""
-                    className={`
-                      w-full
-                      h-full
-                      object-cover
-                    `}
-                    width={300}
-                    height={300}
-                  />
-                </div>
-
-                <div
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                  className={`
-                    mb-2
-                  `}
-                />
-
-                <footer
-                  className={`
-                    flex
-                    flex-row
-                    gap-2
-                    items-center
-                  `}
-                >
-                  <a
-                    href={item.link.url}
-                    target="_blank"
-                    className={`
-                      text-sm
-                      text-blue-400
-                      hover:underline
-                      flex
-                      flex-row
-                      gap-1/2
-                      items-center
-                    `}
-                  >
-                    <ArrowTopRightOnSquareIcon
-                      width={16}
-                      height={16}
-                    />
-                    <span>
-                      {item.link.label}
-                    </span>
-                  </a>
-                </footer>
-              </article>
-            ))}
-          </div>
-        </div>
+        {page.slices && (
+          <SliceZone
+            slices={page.slices}
+            components={components}
+          />
+        )}
 
         {/* Articles */}
         <div
@@ -263,20 +131,9 @@ export default async function Home() {
                     </a>
                   </h3>
 
-                  <time
-                    className={`
-                      text-sm
-                      text-gray-400
-                      mb-1
-                      block
-                    `}
-                  >
-                    {format(
-                      new Date(post.published_at),
-                      'PP',
-                      { locale: ptBR },
-                    )}
-                  </time>
+                  <Datetime
+                    date={post.published_at}
+                  />
                 </header>
 
                 <div

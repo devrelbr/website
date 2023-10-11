@@ -3,13 +3,10 @@ import type { Config } from 'tailwindcss';
 const BASE = 8;
 
 const minWidth = {
-  xs: 0,
   sm: '320px',
   md: '768px',
   lg: '1025px',
-  xl: '1600px',
-  '1/2': '50%',
-  full: '100%',
+  xl: '1200px',
 };
 
 const spacing = {
@@ -59,12 +56,17 @@ const config: Config = {
       ...spacing,
     },
     container: {
+      center: true,
       padding: {
         DEFAULT: `calc(${BASE}px * 4)`,
         xs: `calc(${BASE}px * 4)`,
       },
+      screens: {
+        ...minWidth,
+      },
     },
     extend: {
+      minWidth,
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
