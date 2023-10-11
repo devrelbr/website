@@ -22,7 +22,7 @@ export default async function Home() {
   const posts = await getDevToPosts();
 
   const hightlight = [{
-    title: 'DevRel é para você ? - #2 Bastidores de eventos de tecnologia',
+    title: 'DevRel é para você? - #2 Bastidores de eventos de tecnologia',
     tags: ['live'],
     date: '12 Jul, 2021',
     cover: 'http://lorempixel.com.br/120/120?1',
@@ -53,7 +53,7 @@ export default async function Home() {
         >
           <div
             className={`
-              mb-8
+              mb-6
             `}
           >
             <h2
@@ -208,7 +208,7 @@ export default async function Home() {
         >
           <div
             className={`
-              mb-8
+              mb-6
             `}
           >
             <h2
@@ -222,7 +222,7 @@ export default async function Home() {
             </h2>
 
             <p>
-              Confira abaixo as últimas publicações do blog.
+              Confira abaixo as últimas publicações.
             </p>
           </div>
 
@@ -232,7 +232,8 @@ export default async function Home() {
               grid-cols-1
               gap-4
               md:grid-cols-2
-              md:gap-4
+              md:gap-x-4
+              md:gap-y-8
               lg:grid-cols-3
             `}
           >
