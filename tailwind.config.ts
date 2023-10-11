@@ -24,11 +24,18 @@ const spacing = {
 
 const config: Config = {
   mode: 'jit',
+  darkMode: 'class',
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [
-    '^border-*'
+    {
+      /**
+       * @todo adicionar a `safelist` apenas o que for necessário.
+       */
+      pattern: /border-*|bg-*|text-*/,
+      variants: ['hover'],
+    }
   ],
   theme: {
     spacing,

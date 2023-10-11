@@ -84,14 +84,13 @@ export const Tags = React.forwardRef<
               rounded-1/2
               px-[10px]
               py-[4px]
-
             `
           )}
         >
           <b
             className={clsx(
               `
-                text-${colors[tag]}-10
+                text-${colors[tag]}-400
               `
             )}
           >
