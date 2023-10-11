@@ -113,6 +113,7 @@ export default async function Home() {
                   className={`
                     flex
                     flex-row
+                    flex-wrap
                     gap-1
                     mb-4
                   `}
@@ -281,6 +282,7 @@ export default async function Home() {
                     flex-row
                     gap-1
                     mb-4
+                    flex-wrap
                   `}
                 >
                   {post.tag_list.map(
