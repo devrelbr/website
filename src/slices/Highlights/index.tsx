@@ -1,7 +1,8 @@
 import { Content } from '@prismicio/client';
-import { SliceComponentProps, PrismicRichText } from '@prismicio/react';
+import { SliceComponentProps } from '@prismicio/react';
 
-import Post from '@/components/Post';
+import RichText from '@/components/Prismic/RichText';
+import Post from '@/components/Prismic/Post';
 
 type HighlightsProps = SliceComponentProps<Content.HighlightsSlice>;
 
@@ -19,27 +20,11 @@ const Highlights = ({ slice }: HighlightsProps): JSX.Element => {
           mb-6
         `}
       >
-        <PrismicRichText
+        <RichText
           field={slice.primary.title}
-          components={{
-            /**
-             * @todo Transformar em componente quando houver definição de layout.
-             */
-            heading2: ({ children }) => (
-              <h2
-                className={`
-                  text-4xl
-                  md:text-5xl
-                  font-bold
-                `}
-              >
-                {children}
-              </h2>
-            ),
-          }}
         />
 
-        <PrismicRichText
+        <RichText
           field={slice.primary.content}
         />
       </div>

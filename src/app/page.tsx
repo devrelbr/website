@@ -130,7 +130,7 @@ export default async function Home() {
               lg:grid-cols-3
             `}
           >
-            {posts.map(({ id, ...post }: any) => (
+            {posts.map(({ id, ...post }) => (
               <article
                 key={id}
               >

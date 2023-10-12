@@ -1,14 +1,13 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-import {
-  PrismicNextLink,
-  PrismicNextImage,
-} from '@prismicio/next';
+import { PrismicNextLink } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import type * as prismic from '@prismicio/client';
 import Datetime from '@/components/Datetime';
 import Tags from '@/components/Tags';
+import RichText from '@/components/Prismic/RichText';
+import Image from '@/components/Prismic/Image';
 
 type PostElement = HTMLDivElement;
 export type PostProps = {
@@ -19,15 +18,9 @@ export type PostProps = {
   link: prismic.LinkField;
   cover: prismic.ImageField;
 } & {
-  /**
-   * Optional `className` to add to the root element.
-   */
   className?: string;
 }
-/**
- * This component works with Prismic integration and
- * can't be used without it.
- */
+
 export const Post = React.forwardRef<
   PostElement,
   PostProps
@@ -57,24 +50,8 @@ export const Post = React.forwardRef<
         <PrismicNextLink
           field={link}
         >
-          <PrismicRichText
+          <RichText
             field={title}
-            components={{
-              /**
-               * @todo Transformar em componente quando houver definição de layout.
-               */
-              heading3: ({ children }) => (
-                <h2
-                  className={`
-                    text-xl
-                    font-bold
-                    md:text-2xl
-                  `}
-                >
-                  {children}
-                </h2>
-              ),
-            }}
           />
         </PrismicNextLink>
 
@@ -105,23 +82,12 @@ export const Post = React.forwardRef<
       <PrismicNextLink
         field={link}
         className={`
-          rounded-2
-          overflow-hidden
-          max-h-[400px]
-          mb-2
           block
-          [&>img]:transition-transform
-          hover:[&>img]:scale-110
         `}
       >
-        <PrismicNextImage
+        <Image
           field={cover}
           alt=""
-          className={`
-            w-full
-            h-full
-            object-cover
-          `}
           width={300}
           height={300}
         />
