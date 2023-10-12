@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { PrismicRichText } from '@prismicio/react';
-import type * as prismic from '@prismicio/client';
-
 import Heading from '@/components/Heading';
+import type * as prismic from '@prismicio/client';
+import { PrismicRichText } from '@prismicio/react';
+import * as React from 'react';
 
 export type RichTextProps = {
   field: prismic.RichTextField;

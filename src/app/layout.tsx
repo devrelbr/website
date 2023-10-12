@@ -1,7 +1,8 @@
 import './globals.css'
+import clsx from 'clsx';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google';
-import clsx from 'clsx';
+
 import Discord from './icons/Discord.svg';
 import Instagram from './icons/Instagram.svg';
 import Twitter from './icons/Twitter.svg';

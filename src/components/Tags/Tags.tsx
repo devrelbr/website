@@ -1,7 +1,5 @@
-import * as React from 'react';
 import clsx from 'clsx';
-import type * as prismic from '@prismicio/client';
-import { format } from '@/utils/date';
+import * as React from 'react';
 
 type TagsElement = HTMLElement;
 export type TagsProps = {
@@ -54,14 +52,13 @@ export const Tags = React.forwardRef<
     tags = list;
   }
 
-  console.log(tags)
-
   if (tags.length === 0) {
     return null;
   }
 
   return (
     <ul
+      ref={ref}
       className={clsx(
         className,
         `

@@ -1,8 +1,8 @@
+import Post from '@/components/Prismic/Post';
+import RichText from '@/components/Prismic/RichText';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 
-import RichText from '@/components/Prismic/RichText';
-import Post from '@/components/Prismic/Post';
 
 type HighlightsProps = SliceComponentProps<Content.HighlightsSlice>;
 

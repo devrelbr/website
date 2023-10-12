@@ -1,13 +1,13 @@
-import * as React from 'react';
-import clsx from 'clsx';
+import Datetime from '@/components/Datetime';
+import Image from '@/components/Prismic/Image';
+import RichText from '@/components/Prismic/RichText';
+import Tags from '@/components/Tags';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import type * as prismic from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
-import type * as prismic from '@prismicio/client';
-import Datetime from '@/components/Datetime';
-import Tags from '@/components/Tags';
-import RichText from '@/components/Prismic/RichText';
-import Image from '@/components/Prismic/Image';
+import clsx from 'clsx';
+import * as React from 'react';
 
 type PostElement = HTMLDivElement;
 export type PostProps = {

@@ -1,6 +1,6 @@
-import * as React from 'react';
 import clsx from 'clsx';
 import NextImage from 'next/image';
+import * as React from 'react';
 
 type ImageElement = HTMLImageElement;
 export type ImageProps = {

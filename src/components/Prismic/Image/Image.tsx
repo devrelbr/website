@@ -1,9 +1,9 @@
-import * as React from 'react';
-import clsx from 'clsx';
+import DefaultImage from '@/components/Image';
 import type * as prismic from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { PrismicNextImageProps } from '@prismicio/next';
-import DefaultImage from '@/components/Image';
+import clsx from 'clsx';
+import * as React from 'react';
 
 type ImageElement = HTMLImageElement;
 export type ImageProps = PrismicNextImageProps

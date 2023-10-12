@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-import { createClient } from '@/prismicio';
-import { SliceZone } from '@prismicio/react';
-import { components } from '@/slices';
-import type { Content } from '@prismicio/client';
 import Datetime from '@/components/Datetime';
 import Tags from '@/components/Tags';
+import { createClient } from '@/prismicio';
+import { components } from '@/slices';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import type { Content } from '@prismicio/client';
+import { SliceZone } from '@prismicio/react';
 import { Metadata, ResolvingMetadata } from 'next';
+import Image from 'next/image';
 
 const DEV_TO_API_URL = process.env.DEV_TO_API_URL as string;
 

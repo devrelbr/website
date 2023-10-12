@@ -1,7 +1,7 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import type * as prismic from '@prismicio/client';
 import { format } from '@/utils/date';
+import type * as prismic from '@prismicio/client';
+import clsx from 'clsx';
+import * as React from 'react';
 
 type DatetimeElement = HTMLTimeElement;
 export type DatetimeProps = {
@@ -26,6 +26,7 @@ export const Datetime = React.forwardRef<
 
   return (
     <time
+      ref={ref}
       className={clsx(
         className,
         `
