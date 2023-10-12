@@ -3,9 +3,6 @@ import * as React from 'react';
 
 type TagsElement = HTMLElement;
 export type TagsProps = {
-  /**
-   * Optional `className` to add to the root element.
-   */
   className?: string;
   list: string[] | string;
   /**
